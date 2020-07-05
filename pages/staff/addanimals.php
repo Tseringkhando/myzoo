@@ -57,12 +57,12 @@ if (isset($_POST['saveAnimal'])) {
 			'dietary'=>$_POST['dietary'],
 			'global_population'=>$_POST['global_population'],
 			'animal_description'=>$_POST['animal_description'],
-			
-
+			'location_id'=>$_POST['location_id'],
 		];
 		// 'animal_photo'=>$_FILES['animal_photo']['name']
 		// move_uploaded_file($tmpimage, $urlimage);
 		$stmt = $tbl_animals->insertUpdate($vals, 'id');
+		
 		if ($stmt) echo ' <script> alert("Animal Added");
 					</script>';
 		else echo ' <script> alert("Error"); </script>';

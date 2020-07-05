@@ -63,8 +63,8 @@
             <div class="position-relative row form-group"><label for="animalGender" class="col-sm-2 col-form-label">Gender</label>
                 <div class="col-sm-10">
                     <select name="gender" id="animalGender" class="form-control">
-                        <option value="female" >Female</option>
-                        <option value="male">Male</option>
+                        <option value="Female" >Female</option>
+                        <option value="Male">Male</option>
                     </select>
                 </div>
             </div>

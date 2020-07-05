@@ -20,25 +20,27 @@ if (isset($_POST['sponsor_signup'])) {
                 'is_archive' => '0',
                 'role' => 'sponsor'
             ];
-            $vals = [
-                'id' => $_POST['id'],
-                'user_id' => $_POST['user_id'],
-                'client_name' => $_POST['client_name'],
-                'primary_contact' => $_POST['primary_contact'],
-                'address' => $_POST['address'],
-                'sponsorship_band' => $_POST['sponsorship_band']
-            ];
           
             $stmt1 = $tbl_users->insertUpdate($valsUser, 'user_id');
 
             if ($stmt1) {
-                // $last_id = $stmt1->lastInsertId();
-                  //sponsor table
+
+                // values of the sponsors table
+                $vals = [
+                    'id' => $_POST['id'],
+                    'user_id' => $tbl_users->lastPostId(),
+                    'client_name' => $_POST['client_name'],
+                    'primary_contact' => $_POST['primary_contact'],
+                    'address' => $_POST['address'],
+                    'sponsorship_band' => $_POST['sponsorship_band']
+                ];
+                // insert in sponsers table 
           
                 $stmt2 = $tbl_sponsors->insertUpdate($vals, 'id');
+
                 if ($stmt2) {
                     echo ' <script>
-						console.log();
+                    alert("Sponsored Registered");
 						</script>';
                 }
             } else {

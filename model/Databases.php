@@ -76,5 +76,11 @@ class Databases{
 	    $stmt->execute($criteria);
 	    return $stmt;
 	}
+
+	// to get the last id 
+	function lastPostId(){
+		global $pdo;
+		return $pdo->lastInsertId();
+	}
   
 }
