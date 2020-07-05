@@ -2,7 +2,7 @@
 	// to make use of same form for edit and add of category
 	$allcat= $tbl_specie_categories->searchAll();
 		$allCategories=$allcat->fetchAll();
-	if (isset($_GET['catid'])) {
+		if (isset($_GET['catid'])) {
 		
 		$categories = $tbl_specie_categories->search('id', $_GET['catid']);
 		$catQuery = $categories->fetch();
@@ -33,6 +33,18 @@
 			else echo ' <script> alert("Error"); </script>';
 		}
 	}
+
+	// delete category
+	if (isset($_GET['deleteCatId'])) {
+		$id= $_GET['deleteCatId'];
+		$stmt = $tbl_specie_categories->delete('id', $id);
+		if ($stmt) echo ' <script> alert("Category Deleted");
+					document.location = "addcategory";
+					</script>';
+			else echo ' <script> alert("Error"); </script>';
+	}
+
+	
 
 
 	$content = loadTemplate('../../templates/staff/addcategory_template.php', $conditions);

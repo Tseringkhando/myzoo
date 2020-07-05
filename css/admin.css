@@ -941,6 +941,13 @@ pre code {
     .container {
         max-width: 960px
     }
+    .tooltiptext {
+        position: absolute;
+        left: -150px;
+    }
+    #deleteExp .tooltiptext {
+        position: unset;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -24635,4 +24642,38 @@ a.fc-more:hover {
     height: 350px;
     margin-bottom: 30px;
     background-size: 100%
+}
+
+.tooltiptext {
+    display: none;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    overflow: visible;
+    position: absolute;
+    z-index: 1;
+    width: 180px;
+    left: -150px;
+    padding-bottom: 10px;
+}
+
+.tooltiptext .tip-can,
+.tooltiptext .tip-arch {
+    padding: 5px 10px;
+    background-color: #c1c1c1;
+    color: #f1f3ef;
+    border-radius: 5px;
+}
+
+.tooltiptext .tip-arch {
+    background-color: #dc3545;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.tooltiptext .tip-res {
+    background-color: #87c540;
 }

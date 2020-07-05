@@ -140,7 +140,11 @@
             <!-- description -->
             <div class="position-relative row form-group">
                 <label for="animalDescription" class="col-sm-2 col-form-label">Special notes</label>
-                <div class="col-sm-10"><textarea name="animal_description" id="animalDescription" class="form-control" placeholder="Animal Description"></textarea></div>
+                <div class="col-sm-10">
+                <textarea name="animal_description" id="animalDescription" class="form-control" placeholder="Animal Description">
+
+                </textarea>
+            </div>
             </div>
 
             <div class="position-relative row form-group"><label class="col-sm-2 col-form-label">Photo on arrival</label>
