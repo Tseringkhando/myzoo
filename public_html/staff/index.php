@@ -6,8 +6,11 @@ if(isset($_GET['page']))
 {
 
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) 
-	 {require '../../pages/staff/'.$_GET['page']. '.php';}
-	 else { require '../../pages/staff/login.php'; }
+	 {
+	 	require '../../pages/staff/'.$_GET['page']. '.php'; 
+	 	
+	}
+	 else{ header('Location:../signin'); }
 
 }
 else{

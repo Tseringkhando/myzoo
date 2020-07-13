@@ -53,10 +53,13 @@ class Databases{
 	}
 
 	//select query with limit and by descending order of id
-	function searchNumber($howmany){
+	function searchNumber($howmany,$field, $value){
 			global $pdo;
-			$stmt = $pdo->prepare("SELECT * FROM $this->table_name ORDER BY id DESC LIMIT $howmany");
-			$stmt->execute();
+			$stmt = $pdo->prepare("SELECT * FROM $this->table_name WHERE $field = :value ORDER BY id DESC LIMIT $howmany");
+			$criteria = [
+		            'value' => $value
+		    ];
+		    $stmt->execute($criteria);
 			return $stmt;
 		}
 
@@ -82,5 +85,41 @@ class Databases{
 		global $pdo;
 		return $pdo->lastInsertId();
 	}
+
+	// user search 
+		function searchAnimal($field, $value) {
+	    global $pdo;
+	    $stmt = $pdo->prepare("SELECT * FROM $this->table_name WHERE  $field LIKE '%".$value."%'");
+	    $stmt->execute();
+	    return $stmt;
+	}
+
+		function searchTwo($field1, $field2, $value1,$value2) {
+	    global $pdo;
+	    $stmt = $pdo->prepare("SELECT * FROM $this->table_name WHERE  $field1 = :value1 AND $field2=:value2");
+	   	$criteria = ['value1' => $value1, 'value2'=>$value2 ];
+	    $stmt->execute($criteria);
+	    return $stmt;
+	}
+
+		function searchTwoWithName($field1, $field2, $value1,$value2) {
+	    global $pdo;
+	    $stmt = $pdo->prepare("SELECT * FROM $this->table_name WHERE  $field1 = :value1 AND $field2 LIKE '%".$value2."%' ");
+	   	$criteria = ['value1' => $value1];
+	    $stmt->execute($criteria);
+	    return $stmt;
+	}
+
+
+		function searchThree($field1, $field2, $field3, $value1,$value2, $value3) {
+	    global $pdo;
+	    $stmt = $pdo->prepare("SELECT * FROM $this->table_name WHERE  $field1 = :value1 AND $field2=:value2 AND $field3 LIKE '%".$value3."%'");
+	   	$criteria = ['value1' => $value1, 'value2'=>$value2 ];
+	    $stmt->execute($criteria);
+	    return $stmt;
+	}
+
+
+  	
   
 }

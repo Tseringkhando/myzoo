@@ -115,7 +115,13 @@ File: Layout CSS
     margin-bottom: 0;
 }
 
+ .desc_title{
+    color:#000;
+ }
 
+a:hover{
+    text-decoration: none;
+}
 /* Used when elements stack in small viewports */
 
 

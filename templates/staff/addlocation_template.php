@@ -37,3 +37,64 @@
                 <!-- main body ends -->
             </div>
         </div>
+
+        <!-- table -->
+
+        <div class="tab-content">
+            <h2>Locations List</h2>
+            <table id="locationTable" class="display mb-0 table table-bordered">
+                <thead class="">
+                    <?php $sn = 1; ?>
+                    <tr>
+                        <th>Sn</th>
+                        <th>Locations</th>
+                        <th>Vacant</th>
+                        <th>Dimensions</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($allLocations as $row) { ?>
+                        <tr>
+                            <td><?php echo $sn; ?></td>
+                            <td><a href="addlocation&locationId=<?php echo $row['id']; ?>"><?php echo $row['location']; ?></a></td>
+                            <td><?php echo $row['vacant']; ?></td>
+                            <td><?php echo $row['dimension_sqft']; ?></td>
+                            <td>
+                                <a href="addlocation&locationId=<?php echo $row['id']; ?>"><img src="../../images/icons/edit.png" alt="" class="table_icon" title="Edit category"></a>
+
+                                <button type="button" id="deletebtn<?php echo $row['id']; ?>" class="deletebtn btn btn-edit" data-toggle="modal" data-target=".bd-deletecat-modal-sm">
+                                    <img src="../../images/icons/trash.png" alt="" class="table_icon" title="Delete category">
+                                    <div id="tooltip<?php echo $row['id']; ?>" class="tooltiptext">
+                                        <p>Are you sure?</p>
+                                        <a class="tip-arch" id="<?php echo $row['id']; ?>" href="addlocation&deletelocationId=<?php echo $row['id']; ?>">Delete</a>
+                                        <span class="tip-can">Cancel</span>
+
+                                    </div>
+                                </button>
+                            </td>
+                        </tr>
+                    <?php $sn++;
+                    } ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- jquery -->
+
+        <script>
+            $(document).ready(function() {
+                $('#locationTable').DataTable();
+            });
+
+            $('.tip-can').click(function(ev) {
+                $(this).parent().css({
+                    "display": "none"
+                });
+                ev.stopPropagation();
+            });
+            $('.deletebtn').click(function(ev) {
+                $(this).children()[1].style.display = 'block';
+                ev.stopPropagation();
+            });
+        </script>

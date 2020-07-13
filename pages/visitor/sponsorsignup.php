@@ -5,10 +5,15 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 }
 
 if (isset($_POST['sponsor_signup'])) {
-    //staff login verification
+    if(!isset($_POST['agreeCheck']))
+    {
+        echo ' <script> alert("Agree Terms and Conditions");
+                            </script>';
+    }else{
     $user = $tbl_users->search('user_email', $_POST['user_email']);
     if ($user->rowCount() <= 0) {
         if ($_POST['user_password'] === $_POST['user_confirmpassword']) {
+         
             $valsUser = [
                 'user_id' => $_POST['user_id'],
                 'user_email' => $_POST['user_email'],
@@ -32,7 +37,8 @@ if (isset($_POST['sponsor_signup'])) {
                     'client_name' => $_POST['client_name'],
                     'primary_contact' => $_POST['primary_contact'],
                     'address' => $_POST['address'],
-                    'sponsorship_band' => $_POST['sponsorship_band']
+                    'sponsorship_band' => $_POST['sponsorship_band'],
+                    'sinage_area_percentage'=>$_POST['sinage_area_percentage']
                 ];
                 // insert in sponsers table 
           
@@ -43,15 +49,17 @@ if (isset($_POST['sponsor_signup'])) {
                     alert("Sponsored Registered");
 						</script>';
                 }
-            } else {
-                echo ' <script> alert(" error");
-						
-						</script>';
-            }
+            } 
+        } else
+        {
+             echo ' <script> alert("Passwords dont match");
+                            </script>';
         }
+
     } else {
         echo '<script> alert("Email already registered."); </script>';
     }
+}
 }
 
 $title = "Sign Up!";

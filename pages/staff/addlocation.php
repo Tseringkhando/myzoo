@@ -1,5 +1,6 @@
 <?php
-
+	$s = $tbl_locations->searchAll();
+	$allLocations= $s->fetchAll();
 	//using same form for add and edit
 	//for edit
 	if(isset($_GET['locationId']))
@@ -7,13 +8,14 @@
 		$location= $tbl_locations->search('id',$_GET['locationId']);
 		$locations= $location->fetch();
 	$conditions=[
-		'locations'=>$locations
+		'locations'=>$locations,
+		'allLocations'=>$allLocations
 		];
         $title="Edit Location";
 }
 else{
 	$title= " Add Location";
-	$conditions=[];
+	$conditions=['allLocations'=>$allLocations];
 }
 	
 	if (isset($_POST['saveLocation'])) {
@@ -29,10 +31,19 @@ else{
 		];
 		$stmt = $tbl_locations->insertUpdate($vals,'id');
 		if($stmt) echo ' <script> alert("Location Added");
+						document.location = "addlocation";
 					</script>';
 		else echo ' <script> alert("Error"); </script>';
 	}
 }
-
+// delete location
+if (isset($_GET['deletelocationId'])) {
+	$id= $_GET['deletelocationId'];
+	$stmt = $tbl_locations->delete('id', $id);
+	if ($stmt) echo ' <script> alert("Deleted");
+				document.location = "addlocation";
+				</script>';
+		else echo ' <script> alert("Error"); </script>';
+}
 $content= loadTemplate('../../templates/staff/addlocation_template.php',$conditions);
 	

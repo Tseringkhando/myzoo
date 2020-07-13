@@ -6,7 +6,7 @@
 <input type="hidden" name="id" value="">
 <div class="form-group">
     <label for="userfname">First Name</label>
-    <input name="firstname" type="text" class="form-control" id="userfname" required="true" >
+    <input name="firstname" type="text" class="form-control" id="userfname" >
   </div>
 
   <div class="form-group">

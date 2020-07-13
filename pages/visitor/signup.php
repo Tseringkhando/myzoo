@@ -5,7 +5,16 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 }
 
 if (isset($_POST['user_signup'])) {
-	//staff login verification
+
+	if("" == trim($_POST['firstname']))
+	{
+	echo ' <script> alert(" error");
+						
+						</script>';
+	}
+
+else{
+
 	$user = $tbl_users->search('user_email', $_POST['user_email']);
 	if ($user->rowCount() <= 0) {
 		if ($_POST['user_password'] === $_POST['user_confirmpassword']) {
@@ -37,6 +46,6 @@ if (isset($_POST['user_signup'])) {
 		echo '<script> alert("Email already registered."); </script>';
 	}
 }
-
+}
 $title = "Sign Up!";
 $content = loadTemplate("../templates/visitor/signup_template.php", []);

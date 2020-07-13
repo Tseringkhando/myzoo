@@ -4,19 +4,31 @@ session_start();
 require '../includes/init.php';
 if(isset($_GET['page']))
 		{
-			if($_GET['page']=='login')
+
+			if($_GET['page']=='signin')
 			{
 				if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) 
-	 			{ header('Location:staff/staff_home'); }
+	 			{ 
+	 				if($_SESSION['sessusertype']=='admin'){require '../pages/staff/'.$_GET['page']. '.php';}
+	 				if($_SESSION['sessusertype']=='zookeeper'){require '../pages/staff/'.$_GET['page']. '.php';}
+	 				if($_SESSION['sessusertype']=='visitor'){require '../pages/visitor/'.$_GET['page']. '.php'; }	
+	 				if($_SESSION['sessusertype']=='sponsor'){require '../pages/sponsor/'.$_GET['page']. '.php'; }	
+	 			}
 	 			else{
-	 				require '../pages/staff/login.php';}
+	 				require '../pages/visitor/signin.php'; }
 	 			}
 				
-			else if($_GET['page']=='logout'){require '../pages/staff/logout.php';}	
 			else{require '../pages/visitor/'.$_GET['page']. '.php';}
 		}
-else{ require '../pages/visitor/home.php'; }
-		
+else{$_GET['page']='home'; require '../pages/visitor/home.php'; }
+
+	// category table
+	$cat = $tbl_specie_categories->searchAll();
+	$categories = $cat->fetchAll();
+	// species table
+	$specie = $tbl_species->searchAll();
+	$species = $specie->fetchAll();
+	
 $tempVars = [
 		'title' => $title,
 		'content' => $content

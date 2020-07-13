@@ -20,7 +20,7 @@
  </div>
 
  <div class="tab-content">
- 	<h2>Specie Category Lists</h2>
+ 	<h2>Specie Categories List</h2>
  	<table id="catTable" class="display mb-0 table table-bordered">
  		<thead class="">
  			<?php $sn = 1; ?>
@@ -36,33 +36,36 @@
  					<td><?php echo $sn; ?></td>
  					<td><a href="addcategory&catid=<?php echo $row['id']; ?>"><?php echo $row['category']; ?></a></td>
  					<td>
- 						<a href="addcategory&catid=<?php echo $row['id']; ?>"><img src="../../images/icons/edit.png" alt="" class="admin_icon" title="Edit category"></a>
+ 						<a href="addcategory&catid=<?php echo $row['id']; ?>"><img src="../../images/icons/edit.png" alt="" class="table_icon" title="Edit"></a>
+ 						<!-- archive -->
+                                  <button  style="padding: 0;" type="button" id="deletebtn<?php echo $row['id']; ?>" class="deletebtn btn btn-edit" data-toggle="modal" >
+                                    <img src="../../images/icons/archive.png" alt="" class="table_icon" title="Archive">
+                                    <div id="archivetooltip<?php echo $row['id']; ?>" class="tooltiptext">
+                                        <p>Are you sure?</p>
+                                        <a class="tip-arch" id="<?php echo $row['id']; ?>" href="addcategory&archiveCatId=<?php echo $row['id']; ?>">Archive</a>
+                                        <span class="tip-can">Cancel</span>
 
- 						<button type="button" id="deletebtn<?php echo $row['id']; ?>" class="deletebtn btn mr-2 mb-2 btn-edit" data-toggle="modal" data-target=".bd-deletecat-modal-sm">
- 							<img src="../../images/icons/trash.png" alt="" class="admin_icon" title="Delete category">
+                                    </div>
+                                </button>
+
+
+
+ 						<button style="padding: 0;" type="button" id="deletebtn<?php echo $row['id']; ?>" class=" table_icon deletebtn btn  btn-edit" data-toggle="modal" data-target=".bd-deletecat-modal-sm">
+ 							<img src="../../images/icons/trash.png" alt="" class="table_icon" title="Delete">
  							<div id="tooltip<?php echo $row['id']; ?>" class="tooltiptext">
  								<p>Are you sure?</p>
  								<a class="tip-arch" id="<?php echo $row['id']; ?>" href="addcategory&deleteCatId=<?php echo $row['id']; ?>">Delete</a>
  								<span class="tip-can">Cancel</span>
 
  							</div>
- </div>
- </button>
-
-
-
-
- </td>
- </tr>
- <?php
-					$sn++;
+ 						</button>
+ 					</td>
+ 				</tr>
+ 			<?php $sn++;
 				} ?>
-
- </tbody>
- </table>
-
+ 		</tbody>
+ 	</table>
  </div>
- <!--  -->
 
  <!-- jquery -->
 

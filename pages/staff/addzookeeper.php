@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 
 if (isset($_POST['save_zookeeper'])) {
@@ -15,11 +15,18 @@ if (isset($_POST['save_zookeeper'])) {
 					'gender' => $_POST['gender'],
 					'dob' => $_POST['dob'],
 					'is_archive'=> '0',
-					'role'=>'admin'
+					'role'=>'zookeeper'
 			];
 			$stmt1 = $tbl_users->insertUpdate($valsUser, 'user_id');
 
 			if ($stmt1) {
+				$id=$tbl_users->lastPostId();
+				$vals=[
+			'created_by'=>$_SESSION['sessuserId'],
+			'user_id'=>$id,
+			'action'=>'added'
+				];
+		$addtolog=$tbl_log_users->insert_only($vals);
 			
 						echo ' <script> alert("User Added");
 					

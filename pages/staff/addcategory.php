@@ -1,6 +1,6 @@
 	<?php
 	// to make use of same form for edit and add of category
-	$allcat= $tbl_specie_categories->searchAll();
+	$allcat= $tbl_specie_categories->search('is_archived','0');
 		$allCategories=$allcat->fetchAll();
 		if (isset($_GET['catid'])) {
 		
@@ -44,6 +44,16 @@
 			else echo ' <script> alert("Error"); </script>';
 	}
 
+	// archive 
+if (isset($_GET['archiveCatId'])) {
+	$id= $_GET['archiveCatId'];
+	$vals=['id'=>$id, 'is_archived'=>'1'];
+	$stmt = $tbl_specie_categories->update_only($vals,'id');
+	if ($stmt) echo ' <script> alert("Archived");
+				document.location = "addcategory";
+				</script>';
+		else echo ' <script> alert("Error"); </script>';
+}
 	
 
 

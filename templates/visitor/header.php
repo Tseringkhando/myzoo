@@ -19,10 +19,24 @@
                 </li>
                 <li class="one_quarter">
                     <div class="block clear">
-               
-                        <a href="signin"><i class="fas fa-sign-in-alt"></i>
+                    <?php 
+                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+
+                        if($_SESSION['sessusertype']=='sponsor') {?>
+                          <a href="sponsor/signout"><i class="fas fa-sign-in-alt"></i>
+                            <span><strong>Sign Out</strong></span></a>
+                        <?php }
+                            if($_SESSION['sessusertype']=='visitor') {?>
+                          <a href="signout"><i class="fas fa-sign-in-alt"></i>
+                            <span><strong>Sign Out</strong></span></a>
+                         ?>
+
+
+              <?php } } else {?>
+                       <a href="signin"><i class="fas fa-sign-in-alt"></i>
                             <span><strong>Sign In</strong></span></a>
-                            <a href="sponsorsignup"><img src="../images/icons/sponsoricon.png" alt=""></a>
+                        <?php } ?>
+                            <!-- <a href="sponsorsignup"><img src="../images/icons/sponsoricon.png" alt=""></a> -->
                     </div>
                 </li>
             </ul>
@@ -43,44 +57,31 @@
         <!-- ################################################################################################ -->
         <nav id="mainav">
             <ul class="clear">
-                <li class="active"><a href="home">Home</a></li>
-                <li><a href="about">About us</a></li>
-                <li><a href="pages/gallery.html">Gallery</a></li>
-                <li><a href="#">Tickets</a></li>
-                <li><a class="drop" href="#">Animals</a>
-                    <ul>
-                        <li><a href="pages/full-width.html">Full Width</a></li>
-                        <li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
-                        <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
-                        <li><a href="pages/basic-grid.html">Basic Grid</a></li>
-                        <li><a href="pages/font-icons.html">Font Icons</a></li>
-                    </ul>
+                <li <?php if($_GET['page']=='home'){ ?>class="active" <?php } ?>><a href="home">Home</a></li>
+                <li <?php if($_GET['page']=='about'){ ?>class="active" <?php } ?>><a href="about">About us</a></li>
+                <li <?php if($_GET['page']=='gallery'){ ?>class="active" <?php } ?>><a href="gallery">Gallery</a></li>
+                <li <?php if($_GET['page']=='ticket'){ ?>class="active" <?php } ?>><a href="ticket">Tickets</a></li>
+                <li <?php if($_GET['page']=='animals'){ ?>class="active" <?php } ?>><a class="" href="animals">Animals</a>
                 </li>
-                <li><a class="drop" href="#">Dropdown</a>
-                    <ul>
-                        <li><a href="#">Level 2</a></li>
-                        <li><a class="drop" href="#">Level 2 + Drop</a>
-                            <ul>
-                                <li><a href="#">Level 3</a></li>
-                                <li><a href="#">Level 3</a></li>
-                                <li><a href="#">Level 3</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Level 2</a></li>
-                    </ul>
-                </li>
-
+                <li <?php if($_GET['page']=='events'){ ?>class="active" <?php } ?>><a href="events">Events</a></li>
+                <li  <?php if($_GET['page']=='sponsorsignup'){ ?>class="active" <?php } ?>>
+                <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true && $_SESSION['sessusertype']='sponsor'){ ?>
+                <a href="sponsor/sponsor_home">My Dashboard</a>
+                <?php  } else { ?>
+                    <a href="sponsorsignup">Sponsor</a>
+                    <?php } ?> </li>
 
             </ul>
         </nav>
         <!-- ################################################################################################ -->
         <div id="searchform">
             <div>
-                <form action="#" method="post">
+                <form action="animals" method="POST">
                     <fieldset>
                         <legend>Quick Search:</legend>
-                        <input type="text" placeholder="Enter search term&hellip;" style="color: #fff;">
-                        <button type="submit"><i class="fas fa-search"></i></button>
+                        <input type="text" name="searchKeyword"
+                        placeholder="Enter search term&hellip;" style="color: #fff;">
+                        <button type="submit" name="search"><i class="fas fa-search"></i></button>
                     </fieldset>
                 </form>
             </div>
