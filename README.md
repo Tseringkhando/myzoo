@@ -1,5 +1,5 @@
 # 🦁 MyZoo — Claybrook Zoo Management System
-
+** Live: https://clayzoo.lovestoblog.com
 **Full-Stack Software Engineering Project (Year 3)**  
 Built independently using **PHP**, **MySQL**, **HTML**, **CSS**, and **JavaScript**
 
